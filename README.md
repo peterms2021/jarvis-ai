@@ -1,5 +1,7 @@
 # Vision 
-**A-Jarvis (AJ)** is an AI copilot for designing, deploying, and optimizing enterprise software architecture. The current practice of enterprise architecture design follows a fragmented process. An enterprise software architect, leveraging their years of expertise,  uses a business requirement to produce a solution architecture to deliver the desired business outcomes. This technical design is generally at the systems concept level, as defined by [Simon Brown](https://simonbrown.je/) in his **C4 Model** architecture. Software developers, who follow a more formal SDLC process that includes CI/CD, take this design and develop the represented solution shared by the architect. In the C4 model, the developers implement custom logic that connects multiple container apps composed of various components. Each component consists of code written by the developer. Hence the [C4](https://c4model.com/)= **Concepts, Container, Component, Code**. The vision of this project is to create a copilot that helps enterprise software developers and architects seamlessly work across all layers of the C4 model using natural language in a single workspace.
+**A-Jarvis (AJ)** is an AI copilot for designing, deploying, and optimizing enterprise software architecture. The current practice of enterprise architecture design follows a fragmented process. An enterprise software architect, leveraging their years of expertise,  uses a business requirement to produce a solution architecture to deliver the desired business outcomes. This technical design is generally at the systems concept level, as defined by [Simon Brown](https://simonbrown.je/) in his **C4 Model** architecture. Software developers, who follow a more formal SDLC process that includes CI/CD, take this design and develop the represented solution shared by the architect. In the C4 model, the developers implement custom logic that connects multiple container apps composed of various components. Each component consists of code written by the developer. Hence the [C4](https://c4model.com/)= **Concepts, Container, Component, Code**. The vision of this project is to create a copilot that helps enterprise software developers and architects seamlessly work across all layers of the C4 model using natural language in a single workspace. 
+
+The Structurizr DSL focuses on the the first three levels of diagraming, namely, **Concepts, Container** and **Component**. It assumes that **Code** is handled by other tools, such as UML. Today, code Copilots help developers write significant amounts of code.  This is possible as the language formalism that drives much code generation is mature and has significant repositories on which to train LLMs. This is not true for other levels. **AJ** will create reference designs and associated description to tune or prompt LLM to generate Struturizr diagrams. Additional LLM chaining will be leveraged to generate **code**.
 
 # Motivation
 
@@ -54,7 +56,7 @@ $ uvicorn agents.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 Navigate to http://0.0.0.0:8000/docs, where you will see the Swagger UI with the endpoint to test. Submit your payload and check the output.
 
-To create the AI agent paste the content in the file [first](prompts/first.json)
+To create the AI agent paste the content in the file [first](prompts/first.json) in the create
 ```
 {
     "context": "You are a enterprise software architect specializing in diagrams written in the structurizr language with a maximum of 10 containers. The user can have many software architecture views or instances of model that provides different granularity of views, and your job is always to analyze and guide them to use the diagrams that gives the clearest view of the resiliency of the architecture. The response should include detailed information on the diagrams. The response should also include questions to the user when necessary. If you think your response may be inaccurate or vague, do not write it and answer with the exact text: `I don't have a response. `",
@@ -86,8 +88,19 @@ RUN pip install pip -U && \
     pip install --no-cache-dir -r requirements.txt
 
 # Set the environment variable
+ Set the environment variable
 ARG OPENAI_API_KEY
+ARG OPENAI_API_PROVIDER
+ARG OPENAI_API_BASE
+ARG OPENAI_API_ENGINE
+ARG OPENAI_API_VERSION
+
 ENV OPENAI_API_KEY=$OPENAI_API_KEY
+ENV OPENAI_API_PROVIDER=$OPENAI_API_PROVIDER
+ENV OPENAI_API_BASE=$OPENAI_API_BASE
+ENV OPENAI_API_ENGINE=$OPENAI_API_ENGINE
+ENV OPENAI_API_VERSION=$OPENAI_API_VERSION
+
 
 # Expose the necessary ports
 EXPOSE 8000
