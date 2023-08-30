@@ -48,10 +48,10 @@ def send_message(agent_id, message):
     return {"response": "Error"}
 
 def main():
-    st.set_page_config(page_title = "🤗💬 AIChat")
+    st.set_page_config(page_title = "🤗💬 A-Jarvis AIChat")
 
     with st.sidebar:
-        st.title("Conversational Agent Chat")
+        st.title("Architecture Agent Chat")
 
         # Dropdown to select agent
         agents = get_agents()

@@ -15,10 +15,14 @@ RUN pip install pip -U && \
 
 # Set the environment variable
 ARG OPENAI_API_KEY
+ARG OPENAI_API_PROVIDER
+ARG OPENAI_API_BASE
+ARG OPENAI_API_ENGINE
+
 ENV OPENAI_API_KEY=$OPENAI_API_KEY
 
 # Expose the necessary ports
 EXPOSE 8000
 
 # Run the application
-# CMD ["uvicorn", "agents.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "agents.main:app", "--host", "0.0.0.0", "--port", "8000"]

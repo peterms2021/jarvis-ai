@@ -10,6 +10,36 @@ import agentsfwrk.logger as logger
 
 log = logger.get_logger(__name__)
 
+openai.api_type = "azure"
+openai.api_base = "https://aitest2023.openai.azure.com/"
+openai.api_version = "2023-03-15-preview"
+
+"""
+    openai.api_type = "azure"
+    openai.api_base = "https://aitest2023.openai.azure.com/"
+    openai.api_version = "2023-03-15-preview"
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+"""
+#The name of the Azure instance 
+openai_engine= os.getenv('OPENAI_API_ENGINE')
+
+#
+# response = openai.ChatCompletion.create(
+#        engine="ajarvis",
+#        messages = #messages
+#        temperature=0.7,
+#        max_tokens=800,
+#        top_p=0.95,
+#        frequency_penalty=0,
+#        presence_penalty=0,
+#        stop=None)
+
+openai_engine= os.getenv('OPENAI_API_ENGINE')
+
+openai.api_version = os.getenv('OPENAI_API_PROVIDER')
+openai.api_version = os.getenv('OPENAI_API_BASE')
+openai.api_version = os.getenv('OPENAI_API_VERSION')
+
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 class OpenAIIntegrationService:
@@ -55,6 +85,8 @@ class OpenAIIntegrationService:
         for _ in range(3):
             try:
                 response = openai.ChatCompletion.create(
+                    #engine      = "ajarvis",
+                    engine      = openai_engine,
                     model       = model,
                     messages    = self.messages,
                     **kwargs
@@ -150,6 +182,8 @@ class OpenAIIntegrationService:
         for _ in range(3):
             try:
                 response = openai.ChatCompletion.create(
+                    #engine      = "ajarvis",
+                    engine      = openai_engine,
                     model       = model,
                     messages    = messages,
                     **kwargs

@@ -34,7 +34,7 @@ def get_db():
 # Root endpoint for the router.
 @router.get("/")
 async def agents_root():
-    return {"message": "Hello there conversational ai!"}
+    return {"message": "Hello there enterprise architecture ai!"}
 
 @router.get("/get-agents", response_model = List[agents.api.schemas.Agent])
 async def get_agents(db: Session = Depends(get_db)):
