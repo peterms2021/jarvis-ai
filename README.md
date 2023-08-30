@@ -119,8 +119,9 @@ Build the image, wait until the build is completed, and then test it by running 
 
 # Build the image
 ```
-$ docker build - build-arg OPENAI_API_KEY=<Replace with your OpenAI Key> -t agents-app .
+$ docker build - build-arg OPENAI_API_KEY=<Replace with your OpenAI Key>  OPENAI_API_PROVIDER=<...> OPENAI_API_BASE=<...>  OPENAI_API_ENGINE=<...> OPENAI_API_VERSION=<...> -t agents-app .
 ```
+Replace <...> with the associated value from your provider (Azure or OpenAI).
 Run the container with the command from the agents app (Use -d flag for the detached run).
 ```
 $ docker run -p 8000:8000 agents-app uvicorn agents.main:app --host 0.0.0.0 --port 8000
