@@ -15,6 +15,12 @@ def get_agent(db: Session, agent_id: str):
     """
     return db.query(models.Agent).filter(models.Agent.id == agent_id).first()
 
+def update_agent_name(db: Session, agent_id: str, name:str):
+    """
+    Update the name of an agent by its id
+    """
+    return db.query(models.Agent).filter(models.Agent.id == agent_id).update({'name':name})
+    
 def create_agent(db: Session, agent: schemas.AgentCreate):
     """
     Create an agent in the database
@@ -24,7 +30,8 @@ def create_agent(db: Session, agent: schemas.AgentCreate):
         context         = agent.context,
         first_message   = agent.first_message,
         response_shape  = agent.response_shape,
-        instructions    = agent.instructions
+        instructions    = agent.instructions,
+        name            = agent.name,
     )
     db.add(db_agent)
     db.commit()
@@ -37,6 +44,12 @@ def get_conversation(db: Session, conversation_id: str):
     Get a conversation by its id
     """
     return db.query(models.Conversation).filter(models.Conversation.id == conversation_id).first()
+
+def update_conversation_name(db: Session, conversation_id: str, name:str):
+    """
+    Update the name of an conversation by its id
+    """
+    return db.query(models.Conversation).filter(models.Conversation.id == conversation_id).update({'name':name})
 
 def get_conversations(db: Session, agent_id: str):
     """
@@ -51,6 +64,7 @@ def create_conversation(db: Session, conversation: schemas.ConversationCreate):
     db_conversation = models.Conversation(
         id          = str(uuid.uuid4()),
         agent_id    = conversation.agent_id,
+        name        = conversation.name,
     )
     db.add(db_conversation)
     db.commit()

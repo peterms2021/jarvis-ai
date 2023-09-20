@@ -8,6 +8,7 @@ from pydantic import BaseModel
 ##########################################
 class ConversationBase(BaseModel):
     agent_id: str
+    name: str
 
 class ConversationCreate(ConversationBase):
     pass
@@ -24,12 +25,14 @@ class AgentBase(BaseModel):
     first_message   : str
     response_shape  : str
     instructions    : str
+    name            : str
 
 class AgentCreate(AgentBase):
     pass
 
 class Agent(AgentBase):
     id: str
+    name: str
     timestamp: datetime = datetime.utcnow()
     conversations: List[Conversation] = []
 

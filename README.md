@@ -119,7 +119,7 @@ Build the image, wait until the build is completed, and then test it by running 
 
 # Build the image
 ```
-$ docker build - build-arg OPENAI_API_KEY=<Replace with your OpenAI Key>  OPENAI_API_PROVIDER=<...> OPENAI_API_BASE=<...>  OPENAI_API_ENGINE=<...> OPENAI_API_VERSION=<...> -t agents-app .
+$ docker build - build-arg OPENAI_API_KEY=<Replace with your OpenAI Key>  \nOPENAI_API_PROVIDER=<...> OPENAI_API_BASE=<...>  OPENAI_API_ENGINE=<...> OPENAI_API_VERSION=<...> -t agents-app .
 ```
 Replace <...> with the associated value from your provider (Azure or OpenAI).
 Run the container with the command from the agents app (Use -d flag for the detached run).
@@ -143,8 +143,9 @@ INFO:     172.17.0.1:41770 - "GET /openapi.json HTTP/1.1" 200 OK
 The code below connects to our agent's microservice via API calls and allows the user to select the Agent and the Conversations and chat with the agent, similar to what ChatGPT provides. Let’s run this app by opening another terminal (make sure you have the agents microservice up and running on port 8000) and type:
 
 ``` 
-$ streamlit run src/frontend/main.py and you are ready to go!
+$ streamlit run src/frontend/main.py 
 ```
+and you are ready to go!
 
 <hl>
 This is fork of conversational-ai 

@@ -47,6 +47,18 @@ async def get_agents(db: Session = Depends(get_db)):
 
     return db_agents
 
+
+@router.post("/set-agent-name", response_model =  agents.api.schemas.Agent)
+async def set_agent_name(agent_id: str, name: str, db: Session = Depends(get_db)):
+    """
+    Update the user friendly alias of an agent
+    """
+    log.info("Setting  agent name")
+    results = agents.crud.update_agent_name(db,agent_id, name)
+    log.info(f"Response: {results}")
+
+    return results
+
 @router.post("/create-agent", response_model = agents.api.schemas.Agent)
 async def create_agent(agent: agents.api.schemas.AgentCreate, db: Session = Depends(get_db)):
     """
